@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadastro de Cliente</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h2>Novo Cliente</h2>
+
+<input type="text" id="nome" placeholder="Nome">
+<input type="date" id="dataNascimento">
+<input type="text" id="endereco" placeholder="Endereço">
+
+<select id="plano">
+    <option value="14">Plano 14</option>
+    <option value="28">Plano 28</option>
+</select>
+
+<button onclick="cadastrarCliente()">Salvar</button>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/cliente.js"></script>
+
+</body>
+</html>
