@@ -1,10 +1,65 @@
-body {
-    font-family: Arial;
-    margin: 40px;
+body{
+font-family:Arial;
+margin:0;
+background:#7ed6c1;
 }
 
-input, select, button {
-    display: block;
-    margin: 10px 0;
-    padding: 8px;
+.container{
+background:white;
+padding:30px;
+width:400px;
+margin:auto;
+margin-top:50px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+h2{
+text-align:center;
+}
+
+input,select{
+width:100%;
+padding:10px;
+margin:5px 0 10px 0;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:10px;
+background:#20b2aa;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+margin-top:5px;
+}
+
+button:hover{
+background:#1a8f89;
+}
+
+.cliente{
+background:#f4f4f4;
+padding:10px;
+margin:10px 0;
+border-radius:6px;
+}
+
+.mensalidade{
+display:flex;
+justify-content:space-between;
+background:#f4f4f4;
+padding:8px;
+margin:5px 0;
+border-radius:5px;
+}
+
+.logo{
+text-align:center;
+font-size:24px;
+font-weight:bold;
+margin-bottom:20px;
 }

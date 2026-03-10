@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+<title>Dashboard</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h2>Dashboard</h2>
+<div class="container">
 
-<a href="cadastro.html">Cadastrar Cliente</a><br>
-<a href="financeiro.html">Financeiro</a><br>
-<button onclick="logout()">Sair</button>
+<h2>Menu Principal</h2>
+
+<button onclick="window.location.href='cadastro.html'">
+Cadastrar Cliente
+</button>
+
+<button onclick="window.location.href='clientes.html'">
+Lista de Clientes
+</button>
+
+<button onclick="window.location.href='financeiro.html'">
+Financeiro
+</button>
+
+<button onclick="logout()">
+Sair
+</button>
+
+</div>
 
 <script type="module" src="firebase.js"></script>
 <script type="module" src="auth.js"></script>

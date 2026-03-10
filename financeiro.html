@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Financeiro</title>
-    <link rel="stylesheet" href="style.css">
+<title>Financeiro</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h2>Mensalidades</h2>
+<div class="container">
+
+<h2>Financeiro</h2>
 
 <div id="listaMensalidades"></div>
+
+<canvas id="grafico"></canvas>
+
+<button onclick="gerarPDF()">Gerar PDF</button>
+
+<button onclick="window.location.href='dashboard.html'">
+Voltar
+</button>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script type="module" src="firebase.js"></script>
 <script type="module" src="financeiro.js"></script>
