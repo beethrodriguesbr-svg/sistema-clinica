@@ -1,65 +1,104 @@
 body{
-font-family:Arial;
 margin:0;
-background:#7ed6c1;
+font-family:Arial;
+background:linear-gradient(135deg,#0b2c4d,#1ecad3);
+min-height:100vh;
+color:#333;
 }
 
 .container{
-background:white;
+background:#fff;
 padding:30px;
-width:400px;
+width:420px;
 margin:auto;
-margin-top:50px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.2);
+margin-top:60px;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+animation:fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;}
 }
 
 h2{
 text-align:center;
+color:#0b2c4d;
+}
+
+.logo{
+text-align:center;
+margin-bottom:20px;
+}
+
+.logo img{
+width:120px;
 }
 
 input,select{
 width:100%;
-padding:10px;
-margin:5px 0 10px 0;
-border-radius:5px;
+padding:12px;
+margin:8px 0;
+border-radius:6px;
 border:1px solid #ccc;
 }
 
 button{
 width:100%;
-padding:10px;
-background:#20b2aa;
-color:white;
+padding:12px;
+background:#1ecad3;
 border:none;
-border-radius:5px;
+color:#fff;
+border-radius:6px;
 cursor:pointer;
-margin-top:5px;
+transition:0.3s;
+font-weight:bold;
 }
 
 button:hover{
-background:#1a8f89;
+background:#0b2c4d;
+transform:scale(1.05);
 }
 
 .cliente{
-background:#f4f4f4;
-padding:10px;
+background:#f9f9f9;
+padding:12px;
 margin:10px 0;
-border-radius:6px;
+border-radius:8px;
+transition:0.3s;
 }
 
-.mensalidade{
-display:flex;
-justify-content:space-between;
-background:#f4f4f4;
+.cliente:hover{
+transform:scale(1.02);
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.mensalidades-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+}
+
+.parcela{
+background:#f1f1f1;
 padding:8px;
-margin:5px 0;
-border-radius:5px;
+border-radius:6px;
+text-align:center;
+transition:0.3s;
 }
 
-.logo{
-text-align:center;
-font-size:24px;
-font-weight:bold;
-margin-bottom:20px;
+.parcela:hover{
+background:#1ecad3;
+color:#fff;
+}
+
+.pago{
+background:#4CAF50 !important;
+color:#fff;
+}
+
+.pendente{
+background:#e74c3c !important;
+color:#fff;
 }

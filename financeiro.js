@@ -1,16 +1,9 @@
 import { db } from "./firebase.js";
-
 import {
-collection,
-getDocs,
-doc,
-updateDoc
+collection,getDocs,doc,updateDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const lista=document.getElementById("listaMensalidades");
-
-let totalPago=0;
-let totalPendente=0;
+const lista=document.getElementById("lista");
 
 async function carregar(){
 
@@ -19,7 +12,7 @@ const mensalidades=await getDocs(collection(db,"mensalidades"));
 
 clientes.forEach(c=>{
 
-lista.innerHTML+=`<h3>${c.data().nome}</h3>`;
+lista.innerHTML+=`<h3>${c.data().nome}</h3><div class="mensalidades-grid">`;
 
 mensalidades.forEach(m=>{
 
@@ -27,20 +20,14 @@ const d=m.data();
 
 if(d.clienteId===c.id){
 
-if(d.status==="PAGO") totalPago+=d.valor;
-else totalPendente+=d.valor;
-
 lista.innerHTML+=`
 
-<div class="mensalidade">
+<div class="parcela ${d.status==="PAGO"?"pago":"pendente"}"
+onclick="pagar('${m.id}','${d.status}')">
 
-Parcela ${d.parcela} - R$ ${d.valor}
-
-<button onclick="mudar('${m.id}','${d.status}')">
-
+${d.parcela}<br>
+R$${d.valor}<br>
 ${d.status}
-
-</button>
 
 </div>
 
@@ -50,49 +37,28 @@ ${d.status}
 
 });
 
-});
+lista.innerHTML+="</div>";
 
-grafico();
+});
 
 }
 
-window.mudar=async(id,status)=>{
+window.pagar=async(id,status)=>{
 
-const novo=status==="PAGO"?"Pendente":"PAGO";
-
-await updateDoc(doc(db,"mensalidades",id),{status:novo});
+await updateDoc(doc(db,"mensalidades",id),{
+status: status==="PAGO"?"Pendente":"PAGO",
+dataPagamento:new Date().toLocaleDateString()
+});
 
 location.reload();
 
 }
 
-function grafico(){
-
-new Chart(document.getElementById("grafico"),{
-type:"pie",
-data:{
-labels:["Pago","Pendente"],
-datasets:[{
-data:[totalPago,totalPendente],
-backgroundColor:["green","red"]
-}]
-}
-});
-
-}
-
 window.gerarPDF=()=>{
-
 const {jsPDF}=window.jspdf;
-
 const pdf=new jsPDF();
-
 pdf.text("Relatório Financeiro",20,20);
-pdf.text("Total Pago: "+totalPago,20,40);
-pdf.text("Total Pendente: "+totalPendente,20,50);
-
 pdf.save("relatorio.pdf");
-
 }
 
 carregar();
