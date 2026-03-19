@@ -3,12 +3,17 @@ import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/fi
 
 export async function cadastrarCliente(){
 
-const nome=nome.value;
-const dataNascimento=dataNascimento.value;
-const endereco=endereco.value;
-const plano=plano.value;
+const nome = document.getElementById("nome").value;
+const dataNascimento = document.getElementById("dataNascimento").value;
+const endereco = document.getElementById("endereco").value;
+const plano = document.getElementById("plano").value;
 
-const cliente=await addDoc(collection(db,"clientes"),{
+if(!nome || !plano){
+alert("Preencha os campos!");
+return;
+}
+
+const cliente = await addDoc(collection(db,"clientes"),{
 nome,
 dataNascimento,
 endereco,
@@ -26,5 +31,7 @@ dataPagamento:null
 });
 
 }
+
+alert("Cliente cadastrado com sucesso!");
 
 }

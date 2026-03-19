@@ -5,20 +5,33 @@ collection,getDocs,doc,updateDoc
 
 const lista=document.getElementById("lista");
 
+let relatorio=[];
+
 async function carregar(){
+
+lista.innerHTML="";
 
 const clientes=await getDocs(collection(db,"clientes"));
 const mensalidades=await getDocs(collection(db,"mensalidades"));
 
 clientes.forEach(c=>{
 
-lista.innerHTML+=`<h3>${c.data().nome}</h3><div class="mensalidades-grid">`;
+let clienteNome=c.data().nome;
+
+lista.innerHTML+=`<h3>${clienteNome}</h3><div class="mensalidades-grid">`;
 
 mensalidades.forEach(m=>{
 
 const d=m.data();
 
 if(d.clienteId===c.id){
+
+relatorio.push({
+cliente:clienteNome,
+parcela:d.parcela,
+valor:d.valor,
+status:d.status
+});
 
 lista.innerHTML+=`
 
@@ -27,7 +40,8 @@ onclick="pagar('${m.id}','${d.status}')">
 
 ${d.parcela}<br>
 R$${d.valor}<br>
-${d.status}
+${d.status}<br>
+${d.dataPagamento ? d.dataPagamento : ""}
 
 </div>
 
@@ -55,10 +69,21 @@ location.reload();
 }
 
 window.gerarPDF=()=>{
+
 const {jsPDF}=window.jspdf;
 const pdf=new jsPDF();
+
 pdf.text("Relatório Financeiro",20,20);
+
+let y=30;
+
+relatorio.forEach(r=>{
+pdf.text(`${r.cliente} - Parcela ${r.parcela} - R$${r.valor} - ${r.status}`,20,y);
+y+=10;
+});
+
 pdf.save("relatorio.pdf");
+
 }
 
 carregar();

@@ -102,3 +102,16 @@ color:#fff;
 background:#e74c3c !important;
 color:#fff;
 }
+h3{
+color:#0b2c4d;
+margin-top:20px;
+}
+
+.parcela{
+cursor:pointer;
+font-size:13px;
+}
+
+.parcela:hover{
+transform:scale(1.08);
+}
