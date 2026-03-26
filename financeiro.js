@@ -5,8 +5,6 @@ collection,getDocs,doc,updateDoc
 
 const lista=document.getElementById("lista");
 
-let relatorio=[];
-
 async function carregar(){
 
 lista.innerHTML="";
@@ -16,29 +14,32 @@ const mensalidades=await getDocs(collection(db,"mensalidades"));
 
 clientes.forEach(c=>{
 
-lista.innerHTML+=`<div class="cliente"><strong>${c.data().nome}</strong><div class="mensalidades">`;
+let parcelas=[];
 
 mensalidades.forEach(m=>{
-
 const d=m.data();
-
 if(d.clienteId===c.id){
-
-relatorio.push(d);
-
-lista.innerHTML+=`
-<div class="parcela ${d.status==="PAGO"?"pago":"pendente"}"
-onclick="pagar('${m.id}','${d.status}')">
-
-${d.parcela} - R$${d.valor}<br>
-${d.status}<br>
-${d.dataPagamento || ""}
-
-</div>
-`;
-
+parcelas.push({id:m.id,...d});
 }
+});
 
+parcelas.sort((a,b)=>a.parcela-b.parcela);
+
+lista.innerHTML+=`<div class="cliente">
+<strong>${c.data().nome}</strong>
+<div class="mensalidades">`;
+
+parcelas.forEach(p=>{
+lista.innerHTML+=`
+<div class="parcela ${p.status==="PAGO"?"pago":"pendente"}"
+onclick="pagar('${p.id}','${p.status}')">
+
+${p.parcela}<br>
+R$${p.valor}<br>
+${p.dataVencimento}<br>
+${p.status}
+
+</div>`;
 });
 
 lista.innerHTML+="</div></div>";
@@ -55,24 +56,6 @@ dataPagamento:new Date().toLocaleDateString()
 });
 
 location.reload();
-
-}
-
-window.gerarPDF=()=>{
-
-const {jsPDF}=window.jspdf;
-const pdf=new jsPDF();
-
-pdf.text("Relatório Financeiro",20,20);
-
-let y=30;
-
-relatorio.forEach(r=>{
-pdf.text(`Parcela ${r.parcela} - R$${r.valor} - ${r.status}`,20,y);
-y+=10;
-});
-
-pdf.save("relatorio.pdf");
 
 }
 

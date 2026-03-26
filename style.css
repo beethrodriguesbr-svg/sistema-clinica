@@ -1,82 +1,98 @@
 body{
 margin:0;
 font-family:Arial;
-background:linear-gradient(135deg,#0b2c4d,#1ecad3);
-min-height:100vh;
+background:#eef3f7;
+display:flex;
 }
 
-.container{
-background:#fff;
-padding:30px;
-width:450px;
-margin:auto;
-margin-top:60px;
-border-radius:12px;
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
-animation:fade 0.5s;
-}
-
-@keyframes fade{
-from{opacity:0;transform:translateY(20px);}
-to{opacity:1;}
-}
-
-h2{
-text-align:center;
-color:#0b2c4d;
-}
-
-.logo img{
-width:130px;
-display:block;
-margin:auto;
-margin-bottom:15px;
-}
-
-input,select{
-width:100%;
-padding:12px;
-margin:8px 0;
-border-radius:6px;
-border:1px solid #ccc;
-}
-
-button{
-width:100%;
-padding:12px;
-background:#1ecad3;
+/* MENU LATERAL */
+.sidebar{
+width:240px;
+height:100vh;
+background:linear-gradient(180deg,#0b2c4d,#1ecad3);
 color:#fff;
+padding:20px;
+position:fixed;
+}
+
+.sidebar h2{
+text-align:center;
+margin-bottom:30px;
+}
+
+.sidebar button{
+display:block;
+width:100%;
+margin:10px 0;
+padding:10px;
+background:none;
 border:none;
-border-radius:6px;
+color:#fff;
+text-align:left;
 cursor:pointer;
 transition:.3s;
-font-weight:bold;
 }
 
-button:hover{
+.sidebar button:hover{
+background:rgba(255,255,255,0.2);
+}
+
+/* CONTEÚDO */
+.main{
+margin-left:260px;
+padding:20px;
+width:100%;
+}
+
+/* CARDS */
+.cards{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.card{
+flex:1;
+min-width:200px;
 background:#0b2c4d;
-transform:scale(1.05);
+color:#fff;
+padding:20px;
+border-radius:10px;
+text-align:center;
 }
 
+.card.green{
+background:#1ecad3;
+}
+
+/* CLIENTES */
 .cliente{
-background:#f4f4f4;
-padding:10px;
+background:#fff;
+padding:15px;
 margin:10px 0;
 border-radius:8px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
+/* MENSALIDADES */
 .mensalidades{
 display:flex;
 flex-wrap:wrap;
-gap:5px;
+gap:8px;
+margin-top:10px;
 }
 
 .parcela{
-padding:8px;
-background:#ddd;
-border-radius:5px;
+padding:10px;
+border-radius:6px;
 cursor:pointer;
 font-size:12px;
+background:#ccc;
+transition:.3s;
+}
+
+.parcela:hover{
+transform:scale(1.1);
 }
 
 .pago{background:#4CAF50;color:#fff;}

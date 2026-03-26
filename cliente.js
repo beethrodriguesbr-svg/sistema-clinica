@@ -12,14 +12,20 @@ const cliente=await addDoc(collection(db,"clientes"),{
 nome,dataNascimento,endereco,plano
 });
 
+let dataBase = new Date();
+
 for(let i=1;i<=12;i++){
+
+let dataParcela = new Date(dataBase);
+dataParcela.setDate(dataParcela.getDate() + (30*i));
 
 await addDoc(collection(db,"mensalidades"),{
 clienteId:cliente.id,
 parcela:i,
 valor:Number(plano),
 status:"Pendente",
-dataPagamento:null
+dataPagamento:null,
+dataVencimento:dataParcela.toLocaleDateString()
 });
 
 }
