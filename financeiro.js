@@ -16,9 +16,7 @@ const mensalidades=await getDocs(collection(db,"mensalidades"));
 
 clientes.forEach(c=>{
 
-let clienteNome=c.data().nome;
-
-lista.innerHTML+=`<h3>${clienteNome}</h3><div class="mensalidades-grid">`;
+lista.innerHTML+=`<div class="cliente"><strong>${c.data().nome}</strong><div class="mensalidades">`;
 
 mensalidades.forEach(m=>{
 
@@ -26,32 +24,24 @@ const d=m.data();
 
 if(d.clienteId===c.id){
 
-relatorio.push({
-cliente:clienteNome,
-parcela:d.parcela,
-valor:d.valor,
-status:d.status
-});
+relatorio.push(d);
 
 lista.innerHTML+=`
-
 <div class="parcela ${d.status==="PAGO"?"pago":"pendente"}"
 onclick="pagar('${m.id}','${d.status}')">
 
-${d.parcela}<br>
-R$${d.valor}<br>
+${d.parcela} - R$${d.valor}<br>
 ${d.status}<br>
-${d.dataPagamento ? d.dataPagamento : ""}
+${d.dataPagamento || ""}
 
 </div>
-
 `;
 
 }
 
 });
 
-lista.innerHTML+="</div>";
+lista.innerHTML+="</div></div>";
 
 });
 
@@ -78,7 +68,7 @@ pdf.text("Relatório Financeiro",20,20);
 let y=30;
 
 relatorio.forEach(r=>{
-pdf.text(`${r.cliente} - Parcela ${r.parcela} - R$${r.valor} - ${r.status}`,20,y);
+pdf.text(`Parcela ${r.parcela} - R$${r.valor} - ${r.status}`,20,y);
 y+=10;
 });
 

@@ -11,26 +11,33 @@
 
 <h2>Cadastrar Cliente</h2>
 
-<input id="nome" placeholder="Nome">
-<input type="date" id="dataNascimento">
-<input id="endereco" placeholder="Endereço">
+<label>Nome do Cliente</label>
+<input id="nome">
 
+<label>Data de Nascimento</label>
+<input type="date" id="dataNascimento">
+
+<label>Endereço</label>
+<input id="endereco">
+
+<label>Valor do Plano</label>
 <select id="plano">
-<option value="14">R$14,00</option>
-<option value="28">R$28,00</option>
+<option value="14">R$ 14,00</option>
+<option value="28">R$ 28,00</option>
 </select>
 
-<button id="btnSalvar">Salvar</button>
+<button onclick="salvar()">Salvar</button>
+<button onclick="location.href='dashboard.html'">Voltar</button>
 
 </div>
 
 <script type="module">
 import { cadastrarCliente } from "./cliente.js";
 
-document.getElementById("btnSalvar").addEventListener("click",async ()=>{
+window.salvar = async ()=>{
 await cadastrarCliente();
-window.location.href="dashboard.html";
-});
+location.href="dashboard.html";
+}
 </script>
 
 </body>

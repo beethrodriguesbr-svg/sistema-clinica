@@ -1,6 +1,6 @@
 import { db } from "./firebase.js";
 import {
-collection,getDocs,deleteDoc,doc
+collection,getDocs,doc,updateDoc,deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const lista=document.getElementById("lista");
@@ -20,19 +20,21 @@ mostrar(clientes);
 
 }
 
-function mostrar(listaDados){
+function mostrar(dados){
 
 lista.innerHTML="";
 
-listaDados.forEach(c=>{
+dados.forEach(c=>{
 
 lista.innerHTML+=`
 <div class="cliente">
+
 <strong>${c.nome}</strong><br>
-${c.endereco || ""}
+${c.endereco}
 
-<br><br>
+<br>
 
+<button onclick="editar('${c.id}','${c.nome}')">Editar</button>
 <button onclick="excluir('${c.id}')">Excluir</button>
 
 </div>
@@ -46,8 +48,16 @@ busca.addEventListener("keyup",()=>{
 mostrar(clientes.filter(c=>c.nome.toLowerCase().includes(busca.value.toLowerCase())));
 });
 
+window.editar=async(id,nome)=>{
+let novo=prompt("Novo nome:",nome);
+if(novo){
+await updateDoc(doc(db,"clientes",id),{nome:novo});
+location.reload();
+}
+}
+
 window.excluir=async(id)=>{
-if(confirm("Excluir cliente?")){
+if(confirm("Excluir?")){
 await deleteDoc(doc(db,"clientes",id));
 location.reload();
 }
