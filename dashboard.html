@@ -7,24 +7,46 @@
 
 <body>
 
-<div class="sidebar">
-<h2>POUPE+</h2>
+<div class="layout">
 
+<div class="sidebar">
+
+<img src="logo.png">
+
+<h3 id="userNome">Usuário</h3>
+
+<div class="menu">
 <button onclick="location.href='dashboard.html'">Dashboard</button>
-<button onclick="location.href='cadastro.html'">Cadastro</button>
+<button onclick="location.href='cadastro.html'">Cadastrar</button>
 <button onclick="location.href='clientes.html'">Clientes</button>
 <button onclick="location.href='financeiro.html'">Financeiro</button>
+<button onclick="location.href='perfil.html'">Perfil</button>
 <button onclick="logout()">Sair</button>
 </div>
 
-<div class="main">
+</div>
+
+<div class="content">
 
 <h2>Dashboard</h2>
 
 <div class="cards">
-<div class="card" id="totalClientes">Clientes: 0</div>
-<div class="card green" id="totalPago">Pagos: 0</div>
-<div class="card" id="totalPendente">Pendentes: 0</div>
+<div class="card">
+<h3 id="totalClientes">0</h3>
+<p>Clientes</p>
+</div>
+
+<div class="card">
+<h3 id="totalPago">0</h3>
+<p>Pagos</p>
+</div>
+
+<div class="card">
+<h3 id="totalPendente">0</h3>
+<p>Pendentes</p>
+</div>
+</div>
+
 </div>
 
 </div>

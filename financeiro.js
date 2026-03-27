@@ -14,35 +14,39 @@ const mensalidades=await getDocs(collection(db,"mensalidades"));
 
 clientes.forEach(c=>{
 
+let html=`<div class="cliente"><strong>${c.data().nome}</strong><div class="mensalidades">`;
+
 let parcelas=[];
 
 mensalidades.forEach(m=>{
-const d=m.data();
-if(d.clienteId===c.id){
-parcelas.push({id:m.id,...d});
+if(m.data().clienteId===c.id){
+parcelas.push({id:m.id,...m.data()});
 }
 });
 
+// ORDENAR
 parcelas.sort((a,b)=>a.parcela-b.parcela);
 
-lista.innerHTML+=`<div class="cliente">
-<strong>${c.data().nome}</strong>
-<div class="mensalidades">`;
-
 parcelas.forEach(p=>{
-lista.innerHTML+=`
+
+html+=`
 <div class="parcela ${p.status==="PAGO"?"pago":"pendente"}"
 onclick="pagar('${p.id}','${p.status}')">
 
 ${p.parcela}<br>
 R$${p.valor}<br>
 ${p.dataVencimento}<br>
-${p.status}
+${p.status}<br>
+${p.dataPagamento || ""}
 
-</div>`;
+</div>
+`;
+
 });
 
-lista.innerHTML+="</div></div>";
+html+="</div></div>";
+
+lista.innerHTML+=html;
 
 });
 

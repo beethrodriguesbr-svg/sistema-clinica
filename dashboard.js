@@ -6,19 +6,18 @@ async function carregar(){
 const clientes = await getDocs(collection(db,"clientes"));
 const mensalidades = await getDocs(collection(db,"mensalidades"));
 
-document.getElementById("totalClientes").innerText =
-"Clientes: " + clientes.size;
+document.getElementById("totalClientes").innerText = clientes.size;
 
-let pagos=0;
-let pendentes=0;
+let pago=0;
+let pendente=0;
 
 mensalidades.forEach(m=>{
-if(m.data().status==="PAGO") pagos++;
-else pendentes++;
+if(m.data().status==="PAGO") pago++;
+else pendente++;
 });
 
-document.getElementById("totalPago").innerText = "Pagos: " + pagos;
-document.getElementById("totalPendente").innerText = "Pendentes: " + pendentes;
+document.getElementById("totalPago").innerText = pago;
+document.getElementById("totalPendente").innerText = pendente;
 
 }
 

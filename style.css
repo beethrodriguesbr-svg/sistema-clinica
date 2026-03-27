@@ -1,45 +1,90 @@
 body{
 margin:0;
 font-family:Arial;
-background:#eef3f7;
+background:linear-gradient(135deg,#0b2c4d,#1ecad3);
+min-height:100vh;
+}
+
+/* LOGIN */
+.container{
+background:#fff;
+padding:30px;
+width:420px;
+margin:auto;
+margin-top:80px;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+animation:fade .5s;
+}
+
+.logo img{
+width:140px;
+display:block;
+margin:auto;
+margin-bottom:20px;
+}
+
+/* INPUTS */
+input,select{
+width:100%;
+padding:12px;
+margin:8px 0;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#1ecad3;
+color:#fff;
+border:none;
+border-radius:6px;
+cursor:pointer;
+transition:.3s;
+font-weight:bold;
+}
+
+button:hover{
+background:#0b2c4d;
+transform:scale(1.05);
+}
+
+/* DASHBOARD */
+.layout{
 display:flex;
 }
 
-/* MENU LATERAL */
+/* SIDEBAR */
 .sidebar{
-width:240px;
-height:100vh;
-background:linear-gradient(180deg,#0b2c4d,#1ecad3);
+width:230px;
+background:#0b2c4d;
 color:#fff;
+height:100vh;
 padding:20px;
 position:fixed;
 }
 
-.sidebar h2{
-text-align:center;
-margin-bottom:30px;
-}
-
-.sidebar button{
+.sidebar img{
+width:120px;
 display:block;
-width:100%;
-margin:10px 0;
-padding:10px;
-background:none;
-border:none;
-color:#fff;
-text-align:left;
-cursor:pointer;
-transition:.3s;
+margin:auto;
+margin-bottom:10px;
 }
 
-.sidebar button:hover{
-background:rgba(255,255,255,0.2);
+.sidebar h3{
+text-align:center;
+margin-bottom:20px;
 }
 
-/* CONTEÚDO */
-.main{
-margin-left:260px;
+.menu button{
+margin:5px 0;
+background:#1ecad3;
+}
+
+/* CONTEUDO */
+.content{
+margin-left:250px;
 padding:20px;
 width:100%;
 }
@@ -52,48 +97,51 @@ flex-wrap:wrap;
 }
 
 .card{
-flex:1;
-min-width:200px;
-background:#0b2c4d;
-color:#fff;
+background:#fff;
 padding:20px;
 border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+flex:1;
+min-width:200px;
 text-align:center;
 }
 
-.card.green{
-background:#1ecad3;
-}
-
-/* CLIENTES */
+/* CLIENTE */
 .cliente{
 background:#fff;
 padding:15px;
 margin:10px 0;
-border-radius:8px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
+border-radius:10px;
+box-shadow:0 5px 10px rgba(0,0,0,0.2);
 }
 
 /* MENSALIDADES */
 .mensalidades{
-display:flex;
-flex-wrap:wrap;
-gap:8px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
 margin-top:10px;
 }
 
 .parcela{
 padding:10px;
 border-radius:6px;
+text-align:center;
 cursor:pointer;
-font-size:12px;
-background:#ccc;
 transition:.3s;
+font-size:12px;
 }
 
 .parcela:hover{
-transform:scale(1.1);
+transform:scale(1.05);
 }
 
-.pago{background:#4CAF50;color:#fff;}
-.pendente{background:#e74c3c;color:#fff;}
+.pago{
+background:#4CAF50;
+color:#fff;
+}
+
+.pendente{
+background:#e74c3c;
+color:#fff;
+}

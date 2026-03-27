@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Perfil</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Meu Perfil</h2>
+
+<input id="nome" placeholder="Seu nome">
+<input id="foto" placeholder="URL da foto">
+
+<button onclick="salvar()">Salvar</button>
+<button onclick="location.href='dashboard.html'">Voltar</button>
+
+</div>
+
+<script>
+function salvar(){
+localStorage.setItem("nome",document.getElementById("nome").value);
+alert("Salvo!");
+}
+</script>
+
+</body>
+</html>

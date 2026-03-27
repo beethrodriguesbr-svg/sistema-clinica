@@ -12,12 +12,13 @@ const cliente=await addDoc(collection(db,"clientes"),{
 nome,dataNascimento,endereco,plano
 });
 
+// DATA BASE
 let dataBase = new Date();
 
 for(let i=1;i<=12;i++){
 
 let dataParcela = new Date(dataBase);
-dataParcela.setDate(dataParcela.getDate() + (30*i));
+dataParcela.setDate(dataParcela.getDate() + (30 * (i-1)));
 
 await addDoc(collection(db,"mensalidades"),{
 clienteId:cliente.id,
