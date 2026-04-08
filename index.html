@@ -1,25 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-<title>Login</title>
+<meta charset="UTF-8">
+<title>Login - MEDPRIME System</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="login-body">
 
-<div class="container">
+<div class="login-container">
 
-<div class="logo">
-<img src="logo.png">
+    <div class="login-card">
+
+        <div class="login-header">
+            <img src="logo.png" class="logo">
+            <h2>MEDPRIME <span>System</span></h2>
+        </div>
+
+        <div class="login-form">
+            <label>Email do usuário:</label>
+            <input type="email" id="email" placeholder="Digite seu email">
+
+            <label>Senha:</label>
+            <input type="password" id="senha" placeholder="Digite sua senha">
+
+            <a href="#" class="forgot">Recuperar senha</a>
+
+            <button id="btnLogin" onclick="login()">Entrar</button>
+        </div>
+
+    </div>
+
 </div>
 
-<h2>Login</h2>
-
-<input id="email" placeholder="Email">
-<input type="password" id="senha" placeholder="Senha">
-
-<button onclick="login()">Entrar</button>
-
+<!-- LOADING -->
+<div id="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Entrando...</p>
 </div>
 
 <script type="module" src="firebase.js"></script>
