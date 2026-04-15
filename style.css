@@ -142,3 +142,96 @@ button {
 button:hover {
     opacity: 0.9;
 }
+/* ÍCONES */
+.menu i {
+    margin-right: 8px;
+}
+
+/* CARDS MELHORADOS */
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    flex: 1;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card.destaque {
+    background: linear-gradient(90deg, #0f2a44, #1abc9c);
+    color: white;
+}
+
+/* TABELA */
+.tabela-box {
+    margin-top: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+th {
+    background: #f5f6fa;
+}
+
+/* USER */
+.topbar .user {
+    font-size: 14px;
+}
+
+/* FINANCEIRO */
+.financeiro-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.parcelas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.parcela {
+    width: 90px;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.2s;
+}
+
+.parcela:hover {
+    transform: scale(1.05);
+}
+
+.pago {
+    background: #1abc9c;
+    color: white;
+}
+
+.pendente {
+    background: #ecf0f1;
+}

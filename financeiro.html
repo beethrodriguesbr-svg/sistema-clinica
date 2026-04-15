@@ -3,23 +3,71 @@
 <head>
 <title>Financeiro</title>
 <link rel="stylesheet" href="style.css">
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="container">
+<div class="layout">
 
-<h2>Financeiro</h2>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <img src="logo.png" class="logo-sidebar">
 
-<div id="lista"></div>
+        <div class="menu">
+            <button onclick="location.href='dashboard.html'"><i class="ri-dashboard-line"></i> Dashboard</button>
+            <button onclick="location.href='cadastro.html'"><i class="ri-user-add-line"></i> Cadastro</button>
+            <button onclick="location.href='clientes.html'"><i class="ri-team-line"></i> Clientes</button>
+            <button class="ativo"><i class="ri-money-dollar-circle-line"></i> Financeiro</button>
+            <button onclick="location.href='perfil.html'"><i class="ri-user-line"></i> Perfil</button>
+            <button onclick="logout()"><i class="ri-logout-box-line"></i> Sair</button>
+        </div>
+    </div>
 
-<button onclick="gerarPDF()">Gerar PDF</button>
-<button onclick="location.href='dashboard.html'">Voltar</button>
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- TOPO -->
+        <div class="topbar">
+            <span>Financeiro</span>
+            <span>💰 Controle de Mensalidades</span>
+        </div>
+
+        <!-- CONTEÚDO -->
+        <div class="content">
+
+            <!-- RESUMO -->
+            <div class="cards">
+
+                <div class="card destaque">
+                    <h3 id="totalPrevisto">R$ 0</h3>
+                    <p>Total Previsto</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="totalReceber">R$ 0</h3>
+                    <p>A Receber</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="totalRecebido">R$ 0</h3>
+                    <p>Recebido</p>
+                </div>
+
+            </div>
+
+            <!-- LISTA -->
+            <div id="listaFinanceiro"></div>
+
+        </div>
+
+    </div>
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script type="module" src="financeiro.js"></script>
+<script type="module" src="auth.js"></script>
 
 </body>
 </html>
