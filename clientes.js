@@ -1,6 +1,6 @@
 import { db } from "./firebase.js";
 import {
-collection,getDocs,doc,updateDoc,deleteDoc
+collection, getDocs, doc, updateDoc, deleteDoc, query, where
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const lista=document.getElementById("lista");
@@ -9,6 +9,8 @@ const busca=document.getElementById("busca");
 let clientes=[];
 
 async function carregar(){
+
+clientes = [];
 
 const snap=await getDocs(collection(db,"clientes"));
 
@@ -57,10 +59,23 @@ location.reload();
 }
 
 window.excluir=async(id)=>{
-if(confirm("Excluir?")){
-await deleteDoc(doc(db,"clientes",id));
-location.reload();
+
+if(!confirm("Excluir cliente e TODAS mensalidades?")) return;
+
+// 🔥 APAGAR MENSALIDADES VINCULADAS
+const q = query(collection(db,"mensalidades"), where("clienteId","==",id));
+const snap = await getDocs(q);
+
+for(const docSnap of snap.docs){
+await deleteDoc(doc(db,"mensalidades", docSnap.id));
 }
+
+// 🔥 APAGAR CLIENTE
+await deleteDoc(doc(db,"clientes",id));
+
+alert("Cliente e mensalidades excluídos!");
+location.reload();
+
 }
 
 carregar();

@@ -3,13 +3,11 @@ import {
 collection, getDocs, doc, updateDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const tabela = document.getElementById("tabelaFinanceiro");
+const lista = document.getElementById("listaFinanceiro");
 
-let dados = [];
-
-function formatarData(dataStr){
-let [dia,mes,ano] = dataStr.split("/");
-return new Date(`${ano}-${mes}-${dia}`);
+function formatarDataBR(data){
+let [d,m,a]=data.split("/");
+return new Date(`${a}-${m}-${d}`);
 }
 
 function hoje(){
@@ -20,6 +18,8 @@ return d;
 
 async function carregar(){
 
+lista.innerHTML = "";
+
 const clientesSnap = await getDocs(collection(db,"clientes"));
 const mensalidadesSnap = await getDocs(collection(db,"mensalidades"));
 
@@ -28,84 +28,78 @@ clientesSnap.forEach(c=>{
 clientes[c.id] = c.data().nome;
 });
 
-dados = [];
+let totalPrevisto=0;
+let totalRecebido=0;
 
-let previsto=0, recebido=0, vencido=0, hojeTotal=0;
+// AGRUPAR POR CLIENTE
+let mapa = {};
 
 mensalidadesSnap.forEach(m=>{
-
 let d = m.data();
-let dataVenc = formatarData(d.dataVencimento);
-let dataHoje = hoje();
 
-let statusVisual = "pendente";
-
-if(d.status === "PAGO"){
-statusVisual = "pago";
-} else if(dataVenc < dataHoje){
-statusVisual = "vencido";
-vencido += Number(d.valor);
-} else if(dataVenc.getTime() === dataHoje.getTime()){
-statusVisual = "hoje";
-hojeTotal += Number(d.valor);
+if(!mapa[d.clienteId]){
+mapa[d.clienteId] = [];
 }
 
-let item = {
+mapa[d.clienteId].push({
 id: m.id,
-cliente: clientes[d.clienteId] || "Sem nome",
-descricao: d.descricao || `MENSALIDADE ${d.parcela}`,
-parcela: `${d.parcela}/12`,
-vencimento: d.dataVencimento,
-valor: Number(d.valor),
-status: d.status,
-statusVisual
-};
+...d
+});
 
-dados.push(item);
-
-previsto += item.valor;
-if(item.status === "PAGO") recebido += item.valor;
+totalPrevisto += Number(d.valor);
+if(d.status==="PAGO") totalRecebido += Number(d.valor);
 
 });
 
-document.getElementById("previsto").innerText = "R$ "+previsto.toFixed(2);
-document.getElementById("recebido").innerText = "R$ "+recebido.toFixed(2);
-document.getElementById("aberto").innerText = "R$ "+(previsto-recebido).toFixed(2);
-document.getElementById("vencido").innerText = "R$ "+vencido.toFixed(2);
+document.getElementById("totalPrevisto").innerText = "R$ "+totalPrevisto.toFixed(2);
+document.getElementById("totalRecebido").innerText = "R$ "+totalRecebido.toFixed(2);
+document.getElementById("totalReceber").innerText = "R$ "+(totalPrevisto-totalRecebido).toFixed(2);
 
-render();
+// RENDER
+Object.keys(mapa).forEach(clienteId=>{
 
+let nome = clientes[clienteId] || "Sem nome";
+
+let html = `
+<div class="financeiro-card">
+<h3>${nome}</h3>
+<div class="parcelas">
+`;
+
+mapa[clienteId]
+.sort((a,b)=>a.parcela-b.parcela)
+.forEach(p=>{
+
+let dataVenc = formatarDataBR(p.dataVencimento);
+let statusClass = "pendente";
+
+if(p.status==="PAGO"){
+statusClass="pago";
+}else if(dataVenc < hoje()){
+statusClass="vencido";
+}else if(dataVenc.getTime()===hoje().getTime()){
+statusClass="hoje";
 }
 
-function render(){
+html += `
+<div class="parcela ${statusClass}" onclick="pagar('${p.id}','${p.status}')">
 
-let busca = document.getElementById("buscaCliente").value.toLowerCase();
-let status = document.getElementById("filtroStatus").value;
+<strong>${p.parcela}ª</strong><br>
+${p.descricao}<br>
+R$ ${Number(p.valor).toFixed(2)}<br>
+${p.dataVencimento}<br>
+${p.status}<br>
 
-tabela.innerHTML="";
+<button onclick="event.stopPropagation(); cobrar('${nome}',${p.valor})">📩</button>
 
-dados
-.filter(d=>{
-return (!busca || d.cliente.toLowerCase().includes(busca))
-&& (!status || d.status === status);
-})
-.sort((a,b)=> formatarData(a.vencimento) - formatarData(b.vencimento))
-.forEach(d=>{
-
-tabela.innerHTML += `
-<tr>
-<td>${d.cliente}</td>
-<td>${d.descricao}</td>
-<td>${d.vencimento}</td>
-<td>R$ ${d.valor.toFixed(2)}</td>
-<td class="${d.statusVisual}">${d.status}</td>
-
-<td>
-<button onclick="pagar('${d.id}','${d.status}')">✔</button>
-<button onclick="cobrar('${d.cliente}',${d.valor})">📩</button>
-</td>
-</tr>
+</div>
 `;
+
+});
+
+html += `</div></div>`;
+
+lista.innerHTML += html;
 
 });
 
@@ -113,20 +107,17 @@ tabela.innerHTML += `
 
 window.pagar = async(id,status)=>{
 await updateDoc(doc(db,"mensalidades",id),{
-status: status === "PAGO" ? "Pendente" : "PAGO",
-dataPagamento:new Date().toLocaleDateString()
+status: status==="PAGO"?"Pendente":"PAGO",
+dataPagamento:new Date().toLocaleDateString("pt-BR")
 });
 carregar();
 }
 
 // WHATSAPP
 window.cobrar = (cliente, valor)=>{
-let msg = `Olá ${cliente}, sua mensalidade no valor de R$ ${valor.toFixed(2)} está pendente.`;
+let msg = `Olá ${cliente}, sua mensalidade de R$ ${valor.toFixed(2)} está pendente.`;
 let url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
 window.open(url, "_blank");
 }
-
-document.getElementById("buscaCliente").addEventListener("keyup", render);
-document.getElementById("filtroStatus").addEventListener("change", render);
 
 carregar();
