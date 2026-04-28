@@ -235,3 +235,41 @@ th {
 .pendente {
     background: #ecf0f1;
 }
+/* STATUS */
+.pago{
+background:#1abc9c;
+color:white;
+padding:5px 10px;
+border-radius:6px;
+}
+
+.pendente{
+color:#555;
+}
+
+.vencido{
+background:#e74c3c;
+color:white;
+padding:5px 10px;
+border-radius:6px;
+}
+
+.hoje{
+background:#f1c40f;
+color:black;
+padding:5px 10px;
+border-radius:6px;
+}
+
+/* BOTÕES */
+td button{
+margin-right:5px;
+padding:5px 8px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+td button:hover{
+opacity:0.8;
+}
