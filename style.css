@@ -607,3 +607,84 @@ border-color:#1abc9c;
 outline:none;
 box-shadow:0 0 5px rgba(26,188,156,0.3);
 }
+/* =====================================
+CLIENTES
+===================================== */
+
+.topo-tabela{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.busca-input{
+width:280px;
+max-width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid #ddd;
+background:white;
+}
+
+.acoes{
+display:flex;
+gap:10px;
+}
+
+.btn-editar,
+.btn-excluir{
+width:38px;
+height:38px;
+border:none;
+border-radius:8px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+font-size:16px;
+transition:.2s;
+}
+
+.btn-editar{
+background:#1abc9c;
+color:white;
+}
+
+.btn-excluir{
+background:#e74c3c;
+color:white;
+}
+
+.btn-editar:hover,
+.btn-excluir:hover{
+transform:scale(1.08);
+}
+
+table td{
+vertical-align:middle;
+}
+
+table tr{
+transition:.2s;
+}
+
+table tr:hover{
+background:#f8f9fa;
+}
+
+/* RESPONSIVO */
+@media(max-width:700px){
+
+.topo-tabela{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.busca-input{
+width:100%;
+}
+
+}

@@ -1,25 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-<title>Clientes</title>
+<meta charset="UTF-8">
+<title>Clientes - MEDPRIME System</title>
+
 <link rel="stylesheet" href="style.css">
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="container">
+<div class="layout">
 
-<h2>Clientes</h2>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
 
-<input id="busca" placeholder="Buscar cliente">
+        <img src="logo.png" class="logo-sidebar">
 
-<div id="lista"></div>
+        <div class="menu">
 
-<button onclick="location.href='dashboard.html'">Voltar</button>
+            <button onclick="location.href='dashboard.html'">
+                <i class="ri-dashboard-line"></i> Dashboard
+            </button>
+
+            <button onclick="location.href='cadastro.html'">
+                <i class="ri-user-add-line"></i> Cadastro
+            </button>
+
+            <button class="ativo">
+                <i class="ri-team-line"></i> Clientes
+            </button>
+
+            <button onclick="location.href='financeiro.html'">
+                <i class="ri-money-dollar-circle-line"></i> Financeiro
+            </button>
+
+            <button onclick="location.href='relatorios.html'">
+                <i class="ri-bar-chart-line"></i> Relatórios
+            </button>
+
+            <button onclick="location.href='perfil.html'">
+                <i class="ri-user-line"></i> Perfil
+            </button>
+
+            <button onclick="logout()">
+                <i class="ri-logout-box-line"></i> Sair
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- TOPO -->
+        <div class="topbar">
+            <span>Clientes</span>
+
+            <div class="user">
+                👥 Gestão de Clientes
+            </div>
+        </div>
+
+        <!-- CONTEÚDO -->
+        <div class="content">
+
+            <!-- CARDS -->
+            <div class="cards">
+
+                <div class="card destaque">
+                    <h3 id="totalClientes">0</h3>
+                    <p>Total de Clientes</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="clientesAtivos">0</h3>
+                    <p>Clientes Ativos</p>
+                </div>
+
+            </div>
+
+            <!-- BUSCA -->
+            <div class="tabela-box">
+
+                <div class="topo-tabela">
+
+                    <h3>Lista de Clientes</h3>
+
+                    <input 
+                    type="text" 
+                    id="busca" 
+                    placeholder="Buscar cliente..."
+                    class="busca-input">
+
+                </div>
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Endereço</th>
+                            <th>Plano</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="lista"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
 <script type="module" src="clientes.js"></script>
+<script type="module" src="auth.js"></script>
 
 </body>
 </html>
