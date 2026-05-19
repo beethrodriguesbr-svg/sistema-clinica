@@ -288,3 +288,322 @@ cursor:pointer;
 .parcela button:hover{
 background:#1abc9c;
 }
+/* =========================================
+RESPONSIVIDADE GERAL
+========================================= */
+
+@media(max-width:1200px){
+
+.cards{
+flex-wrap:wrap;
+}
+
+.card{
+min-width:250px;
+}
+
+}
+
+/* =========================================
+TABLET
+========================================= */
+
+@media(max-width:900px){
+
+.layout{
+flex-direction:column;
+}
+
+/* SIDEBAR */
+.sidebar{
+width:100%;
+height:auto;
+flex-direction:row;
+align-items:center;
+justify-content:space-between;
+padding:10px 15px;
+overflow-x:auto;
+}
+
+.logo-sidebar{
+width:120px;
+margin-bottom:0;
+}
+
+.menu{
+display:flex;
+gap:10px;
+}
+
+.menu button{
+white-space:nowrap;
+margin-bottom:0;
+font-size:13px;
+padding:10px 14px;
+}
+
+/* TOPO */
+.topbar{
+padding:15px;
+font-size:14px;
+}
+
+/* CONTENT */
+.content{
+padding:20px;
+}
+
+/* CARDS */
+.cards{
+flex-wrap:wrap;
+}
+
+.card{
+min-width:220px;
+}
+
+/* TABELAS */
+.tabela-box{
+overflow-x:auto;
+}
+
+table{
+min-width:700px;
+}
+
+/* FINANCEIRO */
+.parcelas{
+justify-content:flex-start;
+}
+
+.parcela{
+width:85px;
+font-size:11px;
+}
+
+/* INPUTS */
+input,
+select{
+font-size:14px;
+}
+
+}
+
+/* =========================================
+CELULAR
+========================================= */
+
+@media(max-width:600px){
+
+/* LOGIN */
+.login-card{
+width:95%;
+padding:25px;
+}
+
+.logo-login{
+width:160px;
+}
+
+/* SIDEBAR */
+.sidebar{
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
+}
+
+.menu{
+width:100%;
+display:flex;
+flex-direction:column;
+}
+
+.menu button{
+width:100%;
+font-size:14px;
+}
+
+/* TOPO */
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:5px;
+height:auto;
+padding:15px;
+}
+
+/* CONTENT */
+.content{
+padding:15px;
+}
+
+/* TITULOS */
+h1,h2,h3{
+font-size:20px;
+}
+
+/* CARDS */
+.cards{
+flex-direction:column;
+}
+
+.card{
+width:100%;
+}
+
+/* TABELAS */
+.tabela-box{
+overflow-x:auto;
+padding:15px;
+}
+
+table{
+min-width:650px;
+font-size:13px;
+}
+
+/* PARCELAS */
+.parcelas{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.parcela{
+width:100%;
+font-size:12px;
+padding:12px 5px;
+}
+
+/* FORM */
+.container{
+padding:20px;
+}
+
+input,
+select,
+button{
+font-size:14px;
+}
+
+/* BOTÕES */
+button{
+padding:12px;
+}
+
+/* RELATÓRIOS */
+.relatorios-grid{
+grid-template-columns:1fr;
+}
+
+/* SCROLL */
+body{
+overflow-x:hidden;
+}
+
+}
+
+/* =========================================
+TELAS MUITO PEQUENAS
+========================================= */
+
+@media(max-width:400px){
+
+.logo-sidebar{
+width:100px;
+}
+
+.topbar{
+font-size:12px;
+}
+
+.card h3{
+font-size:20px;
+}
+
+.parcelas{
+grid-template-columns:1fr;
+}
+
+.parcela{
+font-size:11px;
+}
+
+}
+
+/* =========================================
+MELHORIAS VISUAIS
+========================================= */
+
+/* SCROLL BONITO */
+::-webkit-scrollbar{
+width:8px;
+height:8px;
+}
+
+::-webkit-scrollbar-thumb{
+background:#1abc9c;
+border-radius:10px;
+}
+
+::-webkit-scrollbar-track{
+background:#ecf0f1;
+}
+
+/* ANIMAÇÕES */
+.card,
+.financeiro-card,
+.tabela-box,
+.relatorio-card{
+animation:fade .3s ease;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* HOVER PROFISSIONAL */
+.menu button:hover{
+transform:translateX(4px);
+}
+
+/* TABELA */
+table tr:hover{
+background:#f8f9fa;
+}
+
+/* PARCELAS */
+.parcela{
+box-shadow:0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* CARDS */
+.card{
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:4px;
+height:100%;
+background:#1abc9c;
+}
+
+/* INPUTS */
+input:focus,
+select:focus{
+border-color:#1abc9c;
+outline:none;
+box-shadow:0 0 5px rgba(26,188,156,0.3);
+}
